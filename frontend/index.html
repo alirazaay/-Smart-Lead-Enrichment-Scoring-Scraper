@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Lead Enrichment & Scoring Tool</title>
+    <meta name="description" content="AI-powered lead generation tool that enriches company data and scores leads based on business value.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ── Header ──────────────────────────────────────────────────────── -->
+    <header id="app-header">
+        <div class="header-badge">Lead Intelligence</div>
+        <h1>🎯 Smart Lead Enrichment</h1>
+        <p class="subtitle">Enter a company name or website to get an enriched, scored lead profile in seconds.</p>
+    </header>
+
+    <!-- ── Search Section ──────────────────────────────────────────────── -->
+    <main>
+        <section id="search-section" class="card">
+            <div class="input-group">
+                <input
+                    type="text"
+                    id="company-input"
+                    placeholder="e.g. stripe.com, hubspot.com, notion.so"
+                    autocomplete="off"
+                    autofocus
+                >
+                <button id="analyze-btn" onclick="analyzeLead()">
+                    <span class="btn-text">Analyze Lead</span>
+                    <span class="btn-loader" hidden>
+                        <span class="spinner"></span> Analyzing...
+                    </span>
+                </button>
+            </div>
+            <div class="quick-try">
+                Try:
+                <button class="chip" onclick="quickTry('stripe.com')">stripe.com</button>
+                <button class="chip" onclick="quickTry('hubspot.com')">hubspot.com</button>
+                <button class="chip" onclick="quickTry('notion.so')">notion.so</button>
+                <button class="chip" onclick="quickTry('figma.com')">figma.com</button>
+                <button class="chip" onclick="quickTry('shopify.com')">shopify.com</button>
+            </div>
+        </section>
+
+        <!-- ── Error Message ───────────────────────────────────────────── -->
+        <div id="error-message" class="error-banner" hidden></div>
+
+        <!-- ── Results Section ─────────────────────────────────────────── -->
+        <section id="results-section" hidden>
+
+            <!-- Score Header -->
+            <div id="score-header" class="card score-card">
+                <div class="score-left">
+                    <div class="score-number" id="score-value">0</div>
+                    <div class="score-label">/ 100</div>
+                </div>
+                <div class="score-right">
+                    <span class="priority-badge" id="priority-badge">HIGH</span>
+                    <p class="company-name" id="company-name">Company Name</p>
+                    <p class="company-domain" id="company-domain">domain.com</p>
+                </div>
+            </div>
+
+            <!-- Company Details Grid -->
+            <div class="details-grid">
+                <div class="card detail-card" id="detail-industry">
+                    <div class="detail-icon">🏢</div>
+                    <div class="detail-label">Industry</div>
+                    <div class="detail-value" id="val-industry">—</div>
+                </div>
+                <div class="card detail-card" id="detail-location">
+                    <div class="detail-icon">📍</div>
+                    <div class="detail-label">Location</div>
+                    <div class="detail-value" id="val-location">—</div>
+                </div>
+                <div class="card detail-card" id="detail-size">
+                    <div class="detail-icon">👥</div>
+                    <div class="detail-label">Employees</div>
+                    <div class="detail-value" id="val-size">—</div>
+                </div>
+                <div class="card detail-card" id="detail-source">
+                    <div class="detail-icon">📡</div>
+                    <div class="detail-label">Data Source</div>
+                    <div class="detail-value" id="val-source">—</div>
+                </div>
+            </div>
+
+            <!-- Emails -->
+            <div class="card" id="emails-card">
+                <h3>📧 Contact Emails</h3>
+                <div id="emails-list" class="emails-list">
+                    <p class="empty-state">No emails found</p>
+                </div>
+            </div>
+
+            <!-- Score Breakdown -->
+            <div class="card" id="breakdown-card">
+                <h3>📊 Score Breakdown</h3>
+                <div id="breakdown-list" class="breakdown-list"></div>
+            </div>
+
+            <!-- Recommendation -->
+            <div class="card recommendation-card" id="recommendation-card">
+                <h3>💡 Recommendation</h3>
+                <p id="recommendation-text"></p>
+            </div>
+
+            <!-- LinkedIn & Description -->
+            <div class="card" id="extra-card" hidden>
+                <div id="linkedin-row" hidden>
+                    <strong>🔗 LinkedIn:</strong>
+                    <a id="linkedin-link" href="#" target="_blank" rel="noopener"></a>
+                </div>
+                <div id="description-row" hidden>
+                    <strong>📝 About:</strong>
+                    <p id="description-text"></p>
+                </div>
+            </div>
+
+            <!-- Export -->
+            <div class="export-row">
+                <button class="btn-secondary" onclick="exportCSV()">📥 Export as CSV</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── Footer ──────────────────────────────────────────────────────── -->
+    <footer>
+        <p>Smart Lead Enrichment & Scoring Tool &mdash; Built for sales teams who value data-driven decisions.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
